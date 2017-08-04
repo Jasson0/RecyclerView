@@ -5,7 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ViewFlipper;
+
+import com.example.leon.recyclerview.BaseHolder.MyViewHolder;
 
 import java.util.List;
 
@@ -29,9 +30,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<String> myData;
     private Context context;
+    private int holderLayout;
 
-    public MyRecyclerAdapter(Context context) {
+    public MyRecyclerAdapter(Context context, int holderLayout) {
         this.context = context;
+        this.holderLayout = holderLayout;
     }
 
     public void initData(List<String> myData) {
@@ -40,28 +43,25 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //linearView
-        //View itemContent = LayoutInflater.from(context).inflate(R.layout.recycler_item, parent, false);
-        //gridView
-        View itemContent = LayoutInflater.from(context).inflate(R.layout.grid_recycler_item, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(itemContent);
+        View itemContent = LayoutInflater.from(context).inflate(holderLayout, parent, false);
+        MyViewHolder myViewHolder = new MyViewHolder(context, itemContent);
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.textView.setText(myData.get(position));
+        holder.setText(R.id.myText, myData.get(position));
         if (onItemClickListener != null) {
-            holder.textView.setOnClickListener(new View.OnClickListener() {
+            holder.setOnClickListener(R.id.myText, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.onItemClick(view,position);
+                    onItemClickListener.onItemClick(view, position);
                 }
             });
-            holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.setOnLongClickListener(R.id.myText, new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    onItemClickListener.onItemLongClick(view,position);
+                    onItemClickListener.onItemLongClick(view, position);
                     return false;
                 }
             });
@@ -81,5 +81,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void removeData(int position) {
         myData.remove(position);
         notifyItemRemoved(position);
+
+    }
+
+    public void moveData(int from, int dest) {
+        notifyItemMoved(from, dest);
     }
 }

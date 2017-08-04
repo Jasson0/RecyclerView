@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.leon.recyclerview.layout.GridActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/add"
-            android:text="增加一项"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/remove"
-            android:text="删除一项"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myRecyclerView"
         android:layout_width="match_parent"
