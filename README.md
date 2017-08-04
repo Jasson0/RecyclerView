@@ -1,0 +1,3 @@
+# RecyclerView
+RecyclerView的使用（各个流程可以用于以后写代码套用）
+这份代码可以用来以后再写RecyclerView得时候使用，省去不必要的寻找时间
